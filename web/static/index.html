@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HR Attrition Prediction</title>
+    <link rel="stylesheet" href="/static/styles.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🎯 Employee Attrition Prediction System</h1>
+            <p class="subtitle">Predict the likelihood of employee turnover using Machine Learning</p>
+        </header>
+
+        <div class="main-content">
+            <!-- Input Form -->
+            <div class="form-section">
+                <h2>Employee Information</h2>
+                <form id="predictionForm">
+                    <!-- Personal Information -->
+                    <div class="section-group">
+                        <h3>📋 Personal Information</h3>
+                        
+                        <div class="form-group">
+                            <label for="Age">Age: <span id="Age-value">30</span></label>
+                            <input type="range" id="Age" name="Age" min="18" max="65" value="30" class="slider">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="AgeGroup">Age Group:</label>
+                            <select id="AgeGroup" name="AgeGroup" class="select-input">
+                                <option value="18-25">18-25</option>
+                                <option value="26-35" selected>26-35</option>
+                                <option value="36-45">36-45</option>
+                                <option value="46-55">46-55</option>
+                                <option value="55+">55+</option>
+                            </select>
+                            <small>Automatically updated based on Age</small>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="Gender">Gender:</label>
+                            <select id="Gender" name="Gender" class="select-input">
+                                <option value="Male">Male</option>
+                                <option value="Female">Female</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="MaritalStatus">Marital Status:</label>
+                            <select id="MaritalStatus" name="MaritalStatus" class="select-input">
+                                <option value="Single">Single</option>
+                                <option value="Married">Married</option>
+                                <option value="Divorced">Divorced</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="DistanceFromHome">Distance From Home (km): <span id="DistanceFromHome-value">10</span></label>
+                            <input type="range" id="DistanceFromHome" name="DistanceFromHome" min="1" max="30" value="10" class="slider">
+                        </div>
+                    </div>
+
+                    <!-- Education -->
+                    <div class="section-group">
+                        <h3>🎓 Education</h3>
+                        
+                        <div class="form-group">
+                            <label for="Education">Education Level (1-5): <span id="Education-value">3</span></label>
+                            <input type="range" id="Education" name="Education" min="1" max="5" value="3" class="slider">
+                            <small>1=Below College, 2=College, 3=Bachelor, 4=Master, 5=Doctor</small>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="EducationField">Education Field:</label>
+                            <select id="EducationField" name="EducationField" class="select-input">
+                                <option value="Life Sciences">Life Sciences</option>
+                                <option value="Medical">Medical</option>
+                                <option value="Marketing">Marketing</option>
+                                <option value="Technical Degree">Technical Degree</option>
+                                <option value="Human Resources">Human Resources</option>
+                                <option value="Other">Other</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <!-- Job Information -->
+                    <div class="section-group">
+                        <h3>💼 Job Information</h3>
+                        
+                        <div class="form-group">
+                            <label for="Department">Department:</label>
+                            <select id="Department" name="Department" class="select-input">
+                                <option value="Research & Development">Research & Development</option>
+                                <option value="Sales">Sales</option>
+                                <option value="Human Resources">Human Resources</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="JobRole">Job Role:</label>
+                            <select id="JobRole" name="JobRole" class="select-input">
+                                <option value="Sales Executive">Sales Executive</option>
+                                <option value="Research Scientist">Research Scientist</option>
+                                <option value="Laboratory Technician">Laboratory Technician</option>
+                                <option value="Manufacturing Director">Manufacturing Director</option>
+                                <option value="Healthcare Representative">Healthcare Representative</option>
+                                <option value="Manager">Manager</option>
+                                <option value="Sales Representative">Sales Representative</option>
+                                <option value="Research Director">Research Director</option>
+                                <option value="Human Resources">Human Resources</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="JobLevel">Job Level (1-5): <span id="JobLevel-value">2</span></label>
+                            <input type="range" id="JobLevel" name="JobLevel" min="1" max="5" value="2" class="slider">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="BusinessTravel">Business Travel:</label>
+                            <select id="BusinessTravel" name="BusinessTravel" class="select-input">
+                                <option value="Travel_Rarely">Travel Rarely</option>
+                                <option value="Travel_Frequently">Travel Frequently</option>
+                                <option value="Non-Travel">Non-Travel</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <!-- Compensation -->
+                    <div class="section-group">
+                        <h3>💰 Compensation</h3>
+                        
+                        <div class="form-group">
+                            <label for="MonthlyIncome">Monthly Income ($): <span id="MonthlyIncome-value">5000</span></label>
+                            <input type="range" id="MonthlyIncome" name="MonthlyIncome" min="1000" max="20000" value="5000" step="100" class="slider">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="SalarySlab">Salary Slab:</label>
+                            <select id="SalarySlab" name="SalarySlab" class="select-input">
+                                <option value="Upto 5k" selected>Upto 5k</option>
+                                <option value="5k-10k">5k-10k</option>
+                                <option value="10k-15k">10k-15k</option>
+                                <option value="15k+">15k+</option>
+                            </select>
+                            <small>Automatically updated based on Monthly Income</small>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="MonthlyRate">Monthly Rate ($): <span id="MonthlyRate-value">14000</span></label>
+                            <input type="range" id="MonthlyRate" name="MonthlyRate" min="2000" max="27000" value="14000" step="100" class="slider">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="HourlyRate">Hourly Rate ($): <span id="HourlyRate-value">65</span></label>
+                            <input type="range" id="HourlyRate" name="HourlyRate" min="30" max="100" value="65" class="slider">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="DailyRate">Daily Rate ($): <span id="DailyRate-value">800</span></label>
+                            <input type="range" id="DailyRate" name="DailyRate" min="100" max="1500" value="800" step="10" class="slider">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="PercentSalaryHike">Percent Salary Hike (%): <span id="PercentSalaryHike-value">15</span></label>
+                            <input type="range" id="PercentSalaryHike" name="PercentSalaryHike" min="11" max="25" value="15" class="slider">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="StockOptionLevel">Stock Option Level (0-3): <span id="StockOptionLevel-value">1</span></label>
+                            <input type="range" id="StockOptionLevel" name="StockOptionLevel" min="0" max="3" value="1" class="slider">
+                        </div>
+                    </div>
+
+                    <!-- Work Experience -->
+                    <div class="section-group">
+                        <h3>⏱️ Work Experience</h3>
+                        
+                        <div class="form-group">
+                            <label for="TotalWorkingYears">Total Working Years: <span id="TotalWorkingYears-value">10</span></label>
+                            <input type="range" id="TotalWorkingYears" name="TotalWorkingYears" min="0" max="40" value="10" class="slider">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="YearsAtCompany">Years At Company: <span id="YearsAtCompany-value">5</span></label>
+                            <input type="range" id="YearsAtCompany" name="YearsAtCompany" min="0" max="40" value="5" class="slider">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="YearsInCurrentRole">Years In Current Role: <span id="YearsInCurrentRole-value">3</span></label>
+                            <input type="range" id="YearsInCurrentRole" name="YearsInCurrentRole" min="0" max="20" value="3" class="slider">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="YearsSinceLastPromotion">Years Since Last Promotion: <span id="YearsSinceLastPromotion-value">1</span></label>
+                            <input type="range" id="YearsSinceLastPromotion" name="YearsSinceLastPromotion" min="0" max="15" value="1" class="slider">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="YearsWithCurrManager">Years With Current Manager: <span id="YearsWithCurrManager-value">3</span></label>
+                            <input type="range" id="YearsWithCurrManager" name="YearsWithCurrManager" min="0" max="20" value="3" class="slider">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="NumCompaniesWorked">Number of Companies Worked: <span id="NumCompaniesWorked-value">2</span></label>
+                            <input type="range" id="NumCompaniesWorked" name="NumCompaniesWorked" min="0" max="10" value="2" class="slider">
+                        </div>
+                    </div>
+
+                    <!-- Work Environment -->
+                    <div class="section-group">
+                        <h3>🏢 Work Environment</h3>
+                        
+                        <div class="form-group">
+                            <label for="EnvironmentSatisfaction">Environment Satisfaction (1-4): <span id="EnvironmentSatisfaction-value">3</span></label>
+                            <input type="range" id="EnvironmentSatisfaction" name="EnvironmentSatisfaction" min="1" max="4" value="3" class="slider">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="JobSatisfaction">Job Satisfaction (1-4): <span id="JobSatisfaction-value">3</span></label>
+                            <input type="range" id="JobSatisfaction" name="JobSatisfaction" min="1" max="4" value="3" class="slider">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="JobInvolvement">Job Involvement (1-4): <span id="JobInvolvement-value">3</span></label>
+                            <input type="range" id="JobInvolvement" name="JobInvolvement" min="1" max="4" value="3" class="slider">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="WorkLifeBalance">Work Life Balance (1-4): <span id="WorkLifeBalance-value">3</span></label>
+                            <input type="range" id="WorkLifeBalance" name="WorkLifeBalance" min="1" max="4" value="3" class="slider">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="RelationshipSatisfaction">Relationship Satisfaction (1-4): <span id="RelationshipSatisfaction-value">3</span></label>
+                            <input type="range" id="RelationshipSatisfaction" name="RelationshipSatisfaction" min="1" max="4" value="3" class="slider">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="PerformanceRating">Performance Rating (3-4): <span id="PerformanceRating-value">3</span></label>
+                            <input type="range" id="PerformanceRating" name="PerformanceRating" min="3" max="4" value="3" class="slider">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="TrainingTimesLastYear">Training Times Last Year (0-6): <span id="TrainingTimesLastYear-value">3</span></label>
+                            <input type="range" id="TrainingTimesLastYear" name="TrainingTimesLastYear" min="0" max="6" value="3" class="slider">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="OverTime">Over Time:</label>
+                            <select id="OverTime" name="OverTime" class="select-input">
+                                <option value="No">No</option>
+                                <option value="Yes">Yes</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <button type="submit" class="submit-btn">Predict Attrition Risk</button>
+                </form>
+            </div>
+
+            <!-- Results Section -->
+            <div class="results-section" id="resultsSection">
+                <h2>Prediction Results</h2>
+                <div id="loadingSpinner" class="loading" style="display: none;">
+                    <div class="spinner"></div>
+                    <p>Analyzing employee data...</p>
+                </div>
+                <div id="resultsContent" style="display: none;">
+                    <div class="result-card">
+                        <h3>Attrition Probability</h3>
+                        <div class="probability-display">
+                            <div class="percentage" id="probabilityPercentage">0%</div>
+                        </div>
+                        <div class="progress-bar">
+                            <div class="progress-fill" id="progressFill"></div>
+                        </div>
+                    </div>
+                    <div class="result-card">
+                        <h3>Risk Level</h3>
+                        <div class="risk-badge" id="riskBadge">-</div>
+                    </div>
+                    <div class="result-card">
+                        <h3>Prediction</h3>
+                        <div class="prediction-text" id="predictionText">-</div>
+                    </div>
+                </div>
+                <div id="errorMessage" class="error-message" style="display: none;"></div>
+            </div>
+        </div>
+
+        <footer>
+            <p>Powered by FastAPI & Machine Learning (MLP Neural Network)</p>
+            <p>Model Accuracy: 85.8% | AUC-ROC: 0.84</p>
+        </footer>
+    </div>
+
+    <script src="/static/script.js"></script>
+</body>
+</html>
+
