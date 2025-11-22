@@ -22,7 +22,3 @@ Pulling:
 ```bash
 ./convert_to_notebook.py
 ```
-
-## Screenshot
-
-![Screenshot](./assets/image.png)
